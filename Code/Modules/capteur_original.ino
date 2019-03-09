@@ -38,21 +38,22 @@ void loop() {
   Serial.println(" ");
   var();
   delay(200);
-
-  if (m<180 and 100<m and 0<p and p<40 and 0<n and n<40 ) {
+  
+  if ((n-m)>=17) {
     Serial.println("ROUGE");
+    return 0;
   }
-  if (70<p and p<140 and 0<n and n<90 and 35<m<120) {
-    Serial.println("BLEU");
-  }
-  if (60<n and n<140 and 40<m and m<140 and 0<p and p<60) {
+  if (n<p) {
     Serial.println("VERT");
+    return 1;
   }
-  if (110<m and m<150 and 30<p and p<60 and 30<n and n<60) {
-    Serial.println("ORANGE");
+  if (p<n) {
+    Serial.println("BLEU");
+    return 2;
   }
-  if (60<m and m<90 and 10<p and p<50 and 10<n and n<50) {
-    Serial.println("MARRON");
+  else {
+    Serial.println("INCONNU");
+    return 5;
   }
 }
 
