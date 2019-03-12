@@ -59,6 +59,10 @@ void loop() {
           case 2:
           PositiveTurn(0,80,10,servo2);            //on tourne le tobogan jusqu'à l'angle voulu si c'est bleu
           break;
+            
+          case 5:
+          PositiveTurn(0,80,10,servo2);            //on tourne le tobogan jusqu'à l'angle voulu si c'est bleu
+          break;
     }
   
         delay(300);
@@ -105,6 +109,7 @@ int readColor(){
     return 2;
   }
   else {
+    Serial.println("INCONNU");
     return 5;
   }
 }
