@@ -35,7 +35,6 @@ void setup() {
   pinMode(sensorOut, INPUT);
   digitalWrite(S0,HIGH);    // on configure l'Output frequency scaling à 20%
   digitalWrite(S1,LOW);
-  lcd.begin(16,2);
 }
 
 void loop() {
@@ -47,7 +46,7 @@ void loop() {
             servo1.write(i);
             Serial.print("A");
             Serial.println(i);
-            delay(50);}
+            delay(25);}
         delay(400);
         color = readColor();           //le capteur analyse le bonbon et va renvoyer un entier selon la couleur perçue
         Serial.print(color);
@@ -83,7 +82,7 @@ void loop() {
             servo1.write(i);
             Serial.print("B");
             Serial.println(i);
-            delay(25);}
+            delay(10);}
         delay(1000);
         for (int i=90; i>=15; i--){        //on tourne le moteur pour aller chercher le bonbon
             servo1.write(i);
@@ -117,7 +116,7 @@ int readColor(){
   var();
   delay(200);
 
-  if ((n-m)>5) {
+  if ((n-m)>21) {
     Serial.println("ROUGE");
     return 0;
   }
@@ -189,4 +188,20 @@ int var() {
   S=0;
   T=0;
   H=0;
+}
+
+//          Module Rotation Moteur            //
+void PositiveTurn(int beginning,int last,int speedd, Servo moteur){
+   for (int i=beginning; i<=last; i++){                           
+      moteur.write(i);
+      Serial.print("B");
+      Serial.println(i);
+      delay(speedd);}
+}
+void NegativeTurn(int beginning,int last,int speedd, Servo moteur){
+   for (int i=beginning; i>=last; i--){                           
+      moteur.write(i);
+      Serial.print("B");
+      Serial.println(i);
+      delay(speedd);}
 }
