@@ -41,54 +41,30 @@ void loop() {
   
   if (BlueT.available()) {    //Si le module bluetooth est disponible à la connexion
       Data=BlueT.read();      //Lecture du caractère envoyé par le téléphone
-      if (Data=='M') {        //Si on demande à mettre en marche la machine
-        for (int i=15; i<=47; i++){            //on place le bonbon sous le capteur 
-            servo1.write(i);
-            Serial.print("A");
-            Serial.println(i);
-            delay(25);}
+      if (Data=='M') {        //Si on demande à mettre en marche la machine             
+        PositiveTurn(15,47,25,servo1);            //on place le bonbon sous le capteur
         delay(400);
         color = readColor();           //le capteur analyse le bonbon et va renvoyer un entier selon la couleur perçue
         Serial.print(color);
         delay(500);
         switch (color){
-          case 0:
-          for (int i=0; i<=1; i++){              //on tourne le tobogan jusqu'à l'angle voulu si c'est rouge
-            servo2.write(i);
-            Serial.print("D");
-            Serial.println(i);
-            delay(10);}
+          case 0:            
+          PositiveTurn(0,1,10,servo2);            //on tourne le tobogan jusqu'à l'angle voulu si c'est rouge
           break;
       
           case 1:
-          for (int i=0; i<=45; i++){            //on tourne le tobogan jusqu'à l'angle voulu si c'est vert
-            servo2.write(i);
-            Serial.print("D");
-            Serial.println(i);
-            delay(10);}
+          PositiveTurn(0,45,10,servo2);           //on tourne le tobogan jusqu'à l'angle voulu si c'est vert
           break;
       
           case 2:
-          for (int i=0; i<=80; i++){           //on tourne le tobogan jusqu'à l'angle voulu si c'est bleu
-            servo2.write(i);
-            Serial.print("D");
-            Serial.println(i);
-            delay(10);}
+          PositiveTurn(0,80,10,servo2);            //on tourne le tobogan jusqu'à l'angle voulu si c'est bleu
           break;
     }
   
         delay(300);
-        for (int i=50; i<=90; i++){             //on emmene le bonbon au tobogan
-            servo1.write(i);
-            Serial.print("B");
-            Serial.println(i);
-            delay(10);}
+        PositiveTurn(47,90,10,servo1);            //on emmene le bonbon au tobogan
         delay(1000);
-        for (int i=90; i>=15; i--){        //on tourne le moteur pour aller chercher le bonbon
-            servo1.write(i);
-            Serial.print("C");
-            Serial.println(i);
-            delay(10);}
+        NegativeTurn(90,15,10,servo1);       //on tourne le moteur pour aller chercher le bonbon
         color=0;
         delay(1000);
         Data='M';
@@ -194,7 +170,7 @@ int var() {
 void PositiveTurn(int beginning,int last,int speedd, Servo moteur){
    for (int i=beginning; i<=last; i++){                           
       moteur.write(i);
-      Serial.print("B");
+      Serial.print("A");
       Serial.println(i);
       delay(speedd);}
 }
