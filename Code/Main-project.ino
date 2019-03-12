@@ -60,15 +60,14 @@ void loop() {
           PositiveTurn(0,80,10,servo2);            //on tourne le tobogan jusqu'à l'angle voulu si c'est bleu
           break;
             
-          case 5:
-          PositiveTurn(0,80,10,servo2);            //on tourne le tobogan jusqu'à l'angle voulu si c'est bleu
+          case 5:                                  //on ne tourne pas le tobogan si on ne reconnait aucune des trois couleurs 
           break;
     }
   
         delay(300);
         PositiveTurn(47,90,10,servo1);            //on emmene le bonbon au tobogan
         delay(1000);
-        NegativeTurn(90,15,10,servo1);       //on tourne le moteur pour aller chercher le bonbon
+        NegativeTurn(90,15,10,servo1);            //on bouge le moteur afin d'aller chercher le bonbon
         color=0;
         delay(1000);
         Data='M';
@@ -81,6 +80,7 @@ void loop() {
  }
 }
 
+//      Module: Analyse de la couleur générale - Capteur      //
 int readColor(){
   var();
   Serial.print("R : ");
@@ -114,7 +114,8 @@ int readColor(){
   }
 }
 
-int ReadRed() {        // On lit la composante rouge de la source lumineuse
+//      Module: Analyse de la couleur rouge      //
+int ReadRed() {        // On analyse la composante rouge de la source lumineuse
 
   digitalWrite(S2,LOW);
   digitalWrite(S3,LOW);
@@ -129,6 +130,7 @@ int ReadRed() {        // On lit la composante rouge de la source lumineuse
   return(S/5); // on retourne la composante rouge moyenne de la souce lumineuse
 }
 
+//      Module: Analyse de la couleur verte      //
 int ReadGreen() {   // On lit la composante verte de la source lumineuse
 
   digitalWrite(S2,HIGH);
@@ -143,6 +145,7 @@ int ReadGreen() {   // On lit la composante verte de la source lumineuse
   return(T/5);
 }
 
+//      Module: Analyse de la couleur bleue      //
 int ReadBlue() {       // On lit la composante bleue de la source lumineuse
 
   digitalWrite(S2,LOW);
